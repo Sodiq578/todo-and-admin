@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saytga kirish</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Saytga kirish</h1>
+        <form id="loginForm">
+            <label for="password">Parol:</label>
+            <input type="password" id="password" class="password" placeholder="Enter your password" required>
+
+            <button type="submit">Kirish</button>
+        </form>
+        <p id="errorMessage" style="color: red;"></p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (password === 'teacher1') {
+                sessionStorage.setItem('role', 'teacher');
+                window.location.href = '/index.html';
+            } else if (password === 'student') {
+                sessionStorage.setItem('role', 'student');
+                window.location.href = '/pages/about.html';
+            } else {
+                errorMessage.textContent = 'Noto‘g‘ri parol. Iltimos, qayta urinib ko‘ring.';
+            }
+            console.log(JSON.parse(localStorage.getItem('taskData')));
+
+        });
+    </script>
+</body>
+</html>

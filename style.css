@@ -1,0 +1,200 @@
+/* umumiy qoidalar */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  background-image: url('/images/education-background.jpg'); /* Fon rasmi */
+  background-size: cover;
+  background-position: center;
+}
+
+/* H1 */
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  color: #333;
+}
+
+/* Formani o'zgarishlar */
+form {
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+form:hover {
+  background-color: #e9ecef;
+}
+
+/* Label va input */
+label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+input[type="text"], select {
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: calc(100% - 18px);
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus, select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Tugmalar */
+button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #007bff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button.done-button {
+  background-color: #28a745;
+}
+
+button.done-button:hover {
+  background-color: #218838;
+}
+
+button.not-done-button {
+  background-color: #dc3545;
+}
+
+button.not-done-button:hover {
+  background-color: #c82333;
+}
+
+/* Jadval */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+td {
+  background-color: #fff;
+}
+
+td:hover {
+  background-color: #f1f1f1;
+}
+
+/* Edit va Delete tugmalari */
+.edit-button {
+  background-color: #ffc107;
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-button {
+  background-color: #dc3545;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Responsive dizayn */
+@media (max-width: 768px) {
+  form {
+    padding: 15px;
+  }
+
+  input[type="text"], select {
+    width: calc(100% - 16px);
+  }
+
+  table {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  button {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+}
+.about-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 4px;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.about-link:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.about-link:active {
+  background-color: #004494;
+}
+
+
+.password {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.password:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+  outline: none;
+}
+
+.password::placeholder {
+  color: #888;
+  font-style: italic;
+}
