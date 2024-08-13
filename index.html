@@ -7,32 +7,39 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Admin Panel</h1>
-        <form id="taskForm">
-            <label for="name">Task Name:</label>
-            <input type="text" id="name" required>
-            <label for="color">Color:</label>
-            <input type="text" id="color" required>
-            <button type="button" id="addDoneTask">Add Done Task</button>
-            <button type="button" id="addNotDoneTask">Add Not Done Task</button>
-        </form>
-        <table id="taskTable">
-            <thead>
-                <tr>
-                    <th>Task Name</th>
-                    <th>Status Color</th>
-                    <th>Done</th>
-                    <th>Not Done</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Tasks will be populated here -->
-            </tbody>
-        </table>
-    </div>
+    <h1>O'qituchi uchun </h1>
+    
+    <form id="taskForm">
+        <label for="name">Ism:</label>
+        <input type="text" id="name" required>
+        <label for="color">Rangni tanlang:</label>
+        <select id="color" required>
+            <option value="green">Yashil</option>
+            <option value="yellow">Sariq</option>
+            <option value="red">Qizil</option>
+        </select>
+        <button type="button" id="addDoneTask">Bajarildi</button>
+        <button type="button" id="addNotDoneTask">Bajarilmagan</button>
+        <button type="button" id="saveTask" style="display: none;">Saqlash</button>
+    </form>
 
-    <script src="/admin.js"></script>
+    <table id="taskTable">
+        <thead>
+            <tr>
+                <th>Ism</th>
+                <th>Rang</th>
+                <th>Bajarilgan</th>
+                <th>Bajarilmagan</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamic rows will be inserted here -->
+        </tbody>
+    </table>
+    
+    <a href="./pages/about.html" class="about-link">About</a>
+
+    <script src="/js/script.js"></script>
 </body>
 </html>

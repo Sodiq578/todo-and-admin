@@ -3,11 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addDoneTaskButton = document.getElementById('addDoneTask');
     const addNotDoneTaskButton = document.getElementById('addNotDoneTask');
     const taskTable = document.getElementById('taskTable').getElementsByTagName('tbody')[0];
-
-    // Check user role
-    if (sessionStorage.getItem('role') !== 'teacher') {
-        window.location.href = '/pages/login.html';
-    }
+    let editingTaskName = null;
 
     function calculateColor(done, notDone) {
         const totalTasks = done + notDone;
@@ -46,10 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td style="background-color: ${color}; width: 100px;"></td>
                 <td>${task.done}</td>
                 <td>${task.notDone}</td>
+                ${document.querySelector('form') ? `
                 <td>
                     <button class="edit-button" data-name="${task.name}">Edit</button>
                     <button class="delete-button" data-name="${task.name}">Delete</button>
                 </td>
+                ` : ''}
             `;
             taskTable.appendChild(row);
         });
@@ -63,51 +61,99 @@ document.addEventListener('DOMContentLoaded', () => {
         return name.trim() !== '' && color.trim() !== '';
     }
 
-    addDoneTaskButton.addEventListener('click', function() {
-        const name = document.getElementById('name').value;
-        const color = document.getElementById('color').value;
+    function displayEditingForm(task) {
+        document.getElementById('name').value = task.name;
+        document.getElementById('color').value = task.color;
+        addDoneTaskButton.style.display = 'none';
+        addNotDoneTaskButton.style.display = 'none';
+        const saveChangesButton = document.createElement('button');
+        saveChangesButton.id = 'saveChanges';
+        saveChangesButton.textContent = 'Saqlash';
+        taskForm.appendChild(saveChangesButton);
+        
+        const cancelButton = document.createElement('button');
+        cancelButton.id = 'cancelEdit';
+        cancelButton.textContent = 'Bekor qilish';
+        taskForm.appendChild(cancelButton);
 
-        if (!isValidTask(name, color)) {
-            alert('Malumotlarni toldiring');
-            return;
-        }
+        document.getElementById('cancelEdit').addEventListener('click', function() {
+            taskForm.reset();
+            addDoneTaskButton.style.display = 'inline';
+            addNotDoneTaskButton.style.display = 'inline';
+            taskForm.removeChild(saveChangesButton);
+            taskForm.removeChild(cancelButton);
+            editingTaskName = null;
+        });
 
-        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        const existingTask = tasks.find(t => t.name === name);
+        document.getElementById('saveChanges').addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const color = document.getElementById('color').value;
 
-        if (existingTask) {
-            existingTask.status = 'done';
-        } else {
-            tasks.push({ name, color, status: 'done' });
-        }
+            if (!isValidTask(name, color)) {
+                alert('Malumotlarni toldiring');
+                return;
+            }
 
-        saveTasks(tasks);
-        loadTasks();
-        taskForm.reset();
-    });
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            const updatedTasks = tasks.map(t => t.name === editingTaskName ? { ...t, name, color, status: t.status } : t);
+            saveTasks(updatedTasks);
+            loadTasks();
+            taskForm.reset();
+            addDoneTaskButton.style.display = 'inline';
+            addNotDoneTaskButton.style.display = 'inline';
+            taskForm.removeChild(saveChangesButton);
+            taskForm.removeChild(cancelButton);
+            editingTaskName = null;
+        });
+    }
 
-    addNotDoneTaskButton.addEventListener('click', function() {
-        const name = document.getElementById('name').value;
-        const color = document.getElementById('color').value;
+    if (taskForm) {
+        addDoneTaskButton.addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const color = document.getElementById('color').value;
 
-        if (!isValidTask(name, color)) {
-            alert('Malumotarlar qatori bosh');
-            return;
-        }
+            if (!isValidTask(name, color)) {
+                alert('Malumotlarni toldiring');
+                return;
+            }
 
-        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        const existingTask = tasks.find(t => t.name === name);
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            const existingTask = tasks.find(t => t.name === name);
 
-        if (existingTask) {
-            existingTask.status = 'not done';
-        } else {
-            tasks.push({ name, color, status: 'not done' });
-        }
+            if (existingTask) {
+                existingTask.status = 'done';
+            } else {
+                tasks.push({ name, color, status: 'done' });
+            }
 
-        saveTasks(tasks);
-        loadTasks();
-        taskForm.reset();
-    });
+            saveTasks(tasks);
+            loadTasks();
+            taskForm.reset();
+        });
+
+        addNotDoneTaskButton.addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const color = document.getElementById('color').value;
+
+            if (!isValidTask(name, color)) {
+                alert('Malumotarlar qatori bosh');
+                return;
+            }
+
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            const existingTask = tasks.find(t => t.name === name);
+
+            if (existingTask) {
+                existingTask.status = 'not done';
+            } else {
+                tasks.push({ name, color, status: 'not done' });
+            }
+
+            saveTasks(tasks);
+            loadTasks();
+            taskForm.reset();
+        });
+    }
 
     taskTable.addEventListener('click', function(e) {
         const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -115,8 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (e.target.classList.contains('edit-button')) {
             const task = tasks.find(t => t.name === name);
-            document.getElementById('name').value = task.name;
-            document.getElementById('color').value = task.color;
+            editingTaskName = task.name;
+            displayEditingForm(task);
             taskTable.deleteRow(e.target.parentElement.parentElement.rowIndex - 1);
         } else if (e.target.classList.contains('delete-button')) {
             const updatedTasks = tasks.filter(t => t.name !== name);
