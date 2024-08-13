@@ -17,6 +17,7 @@
         <p id="errorMessage" style="color: red;"></p>
     </div>
 
+    <script src="./js/script.js"></script>
     <script>
         document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault();
@@ -32,6 +33,16 @@
                 window.location.href = './pages/about.html';
             } else {
                 errorMessage.textContent = 'Noto‘g‘ri parol. Iltimos, qayta urinib ko‘ring.';
+            }
+        });
+
+        // Redirect based on role if already logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            const role = sessionStorage.getItem('role');
+            if (role === 'teacher') {
+                window.location.href = './pages/admin.html';
+            } else if (role === 'student') {
+                window.location.href = './pages/about.html';
             }
         });
     </script>
