@@ -12,7 +12,6 @@
         <form id="loginForm">
             <label for="password">Parol:</label>
             <input type="password" id="password" class="password" placeholder="Enter your password" required>
-
             <button type="submit">Kirish</button>
         </form>
         <p id="errorMessage" style="color: red;"></p>
@@ -34,8 +33,6 @@
             } else {
                 errorMessage.textContent = 'Noto‘g‘ri parol. Iltimos, qayta urinib ko‘ring.';
             }
-            console.log(JSON.parse(localStorage.getItem('taskData')));
-
         });
     </script>
 </body>
