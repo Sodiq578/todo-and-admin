@@ -173,3 +173,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadTasks(); 
 });
+
+
+
+document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('errorMessage');
+
+    if (password === 'teacher1') {
+        sessionStorage.setItem('role', 'teacher');
+        window.location.href = '/index.html';
+    } else if (password === 'student') {
+        sessionStorage.setItem('role', 'student');
+        window.location.href = '/pages/about.html';
+    } else {
+        errorMessage.textContent = 'Noto‘g‘ri parol. Iltimos, qayta urinib ko‘ring.';
+    }
+});
