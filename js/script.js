@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const task = tasks.find(t => t.name === name);
             editingTaskName = task.name;
             displayEditingForm(task);
-            taskTable.deleteRow(e.target.parentElement.parentElement.rowIndex - 1);
+            taskTable.deleteRow(e.target.parentElement.parentElement.rowadmin - 1);
         } else if (e.target.classList.contains('delete-button')) {
             const updatedTasks = tasks.filter(t => t.name !== name);
             saveTasks(updatedTasks);
@@ -184,7 +184,7 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
 
     if (password === 'teacher1') {
         sessionStorage.setItem('role', 'teacher');
-        window.location.href = '/index.html';
+        window.location.href = '/admin.html';
     } else if (password === 'student') {
         sessionStorage.setItem('role', 'student');
         window.location.href = '/pages/about.html';
