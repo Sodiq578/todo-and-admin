@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel</h1>
+        <form id="taskForm">
+            <label for="name">Task Name:</label>
+            <input type="text" id="name" required>
+            <label for="color">Color:</label>
+            <input type="text" id="color" required>
+            <button type="button" id="addDoneTask">Add Done Task</button>
+            <button type="button" id="addNotDoneTask">Add Not Done Task</button>
+        </form>
+        <table id="taskTable">
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Status Color</th>
+                    <th>Done</th>
+                    <th>Not Done</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Tasks will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="/admin.js"></script>
+</body>
+</html>
